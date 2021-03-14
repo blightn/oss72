@@ -1,0 +1,94 @@
+{% load cms_tags static sekizai_tags menu_tags %}
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}This is my new project home page{% endblock title %}</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+        <!-- Надо разобраться: https://ru.wikipedia.org/wiki/Favicon -->
+        <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}images/favicon.ico"/>
+        <link rel="shortcut icon" type="image/x-icon" href="{{ STATIC_URL }}images/favicon.ico"/>
+        {% render_block "css" %}
+    </head>
+    <body>
+        {% cms_toolbar %}
+        <div class="container-fluid">
+            <!-- Page Header -->
+            {% block header %}
+            <header>
+                <div class="container-fluid">
+                    <div class="row">
+                        <a href="/" title="ООО «А-Завод ПТО»— Перейти на главную">
+                            <img src="{{ STATIC_URL }}images/index.png" height="164" alt="ООО «А-Завод ПТО»: Грузоподъемное оборудование, металлоконструкции, канат, стропы, траверсы" />
+                        </a>
+                        <div class="col-sm-2 align-self-center">
+                            {% static_placeholder "brand name" %}
+                            <br>
+                            {% static_placeholder "brand description" %}
+                        </div>
+                    </div>
+                </div>
+            </header>
+            {% endblock header %}
+            <!-- Navigation -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin:24px 0;">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navb">
+                    <ul class="navbar-nav mr-auto">
+                        {% show_menu 0 1 100 100 "menu.html" %}
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Поиск...">
+                        <button class="btn btn-success my-2 my-sm-0" type="button">Поиск</button>
+                    </form>
+                </div>
+            </nav>
+            {% block content %}{% endblock content %}
+            <!-- Footer -->
+            <footer class="pt-4 my-md-5 pt-md-5 border-top fixed-bottom">
+                <div class="row" align="center">
+                    <div class="col-6 col-md">                    
+                        <button type="button" class="btn btn-primary btn-rounded btn-icon" onclick="location.href='https://vk.com/oss72';" data-toggle="tooltip" title="Мы В контакте">
+                            <i class="fa fa-vk"></i>
+                        </button>
+                        <button type="button" class="btn btn-dark btn-rounded btn-icon" onclick="location.href='https://www.facebook.com/ZaoOrgsnabstroj';" data-toggle="tooltip" title="Мы в FaceBook">
+                            <i class="fa fa-facebook"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-rounded btn-icon" onclick="location.href='https://twitter.com/orgsnab72';" data-toggle="tooltip" title="Мы в Twitter">
+                            <i class="fa fa-twitter"></i>
+                        </button>
+                        <button type="button" class="btn btn-info btn-rounded btn-icon" onclick="location.href='https://orgsnab.livejournal.com';" data-toggle="tooltip" title="Мы в Live Journal">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                    </div>
+                    <div class="col-6 col-md">
+                        <a href="skype:oss72?call" rel="nofollow">
+                            <img src="http://mystatus.skype.com/smallicon/oss72" style="text-align: left; border: none;" width="16" height="16" alt="Мой статус Skype"/>
+                        </a>
+                        &nbsp;Skype консультант
+                        <br/>
+                        <a href="mailto:info@oss72.ru" rel="nofollow">info@oss72.ru</a>
+                    </div>
+                    <div class="col-6 col-md">
+                        625019, г. Тюмень, ул. Республики, 206, стр. 16
+                        <br/>
+                        Тел./факс:&nbsp;+7 (3452) 68-02-98
+                    </div>
+                    <div class="col-6 col-md">
+                        <p class="copyright text-muted">{% static_placeholder "copyright" %}</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        {% render_block "js" %}
+    </body>
+</html>
