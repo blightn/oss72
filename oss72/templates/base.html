@@ -11,6 +11,31 @@
         <!-- Надо разобраться: https://ru.wikipedia.org/wiki/Favicon -->
         <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}images/favicon.ico"/>
         <link rel="shortcut icon" type="image/x-icon" href="{{ STATIC_URL }}images/favicon.ico"/>
+
+        <!-- Для вложенного меню -->
+        <script type="text/javascript">
+            $(document).ready(function () {
+                // Prevent closing from click inside dropdown
+                $(document).on('click', '.dropdown-menu', function (e) {
+                    e.stopPropagation();
+                });
+
+                // Make it as accordion for smaller screens
+                if ($(window).width() < 992) {
+                    $('.dropdown-menu a').click(function (e) {
+                        e.preventDefault();
+                        if ($(this).next('.submenu').length) {
+                            $(this).next('.submenu').toggle();
+                        }
+                        $('.dropdown').on('hide.bs.dropdown', function () {
+                            $(this).find('.submenu').hide();
+                        })
+                    });
+                }
+
+            });
+        </script>
+
         {% render_block "css" %}
     </head>
     <body>
@@ -35,13 +60,12 @@
             {% endblock header %}
             <!-- Navigation -->
             <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin:24px 0;">
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#main_nav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-            
-                <div class="collapse navbar-collapse" id="navb">
+                <div class="collapse navbar-collapse" id="main_nav">
                     <ul class="navbar-nav mr-auto">
-                        {% show_menu 0 1 100 100 "menu.html" %}
+                        {% show_menu 0 100 100 100 "menu.html" %}
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="text" placeholder="Поиск...">
