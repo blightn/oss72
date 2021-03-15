@@ -16,7 +16,7 @@
         </li>
     {% else %}
         <li>
-            <a class="dropdown-item" href="{{ child.get_absolute_url }}">{{ child.get_menu_title }}{% if child.children %} &raquo{% endif %}</a>
+            <a class="dropdown-item{% if child.selected %} active{% endif %}" href="{{ child.get_absolute_url }}">{{ child.get_menu_title }}{% if child.children %} &raquo{% endif %}</a>
             {% if child.children %}
                 <ul class="submenu dropdown-menu">
                     {% show_menu from_level to_level extra_inactive extra_active template "" "" child %}
