@@ -28,7 +28,7 @@ SECRET_KEY = 'hvwztdevw93i^%4r9&fd(s)#ukk=l=a^iwq88d)lz96bn@@6f4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'www.example.com']
 
 
 # Application definition
@@ -72,7 +72,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Europe/Moscow'
 
@@ -149,6 +149,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
     'django.contrib.messages',
+
     'cms',
     'menus',
     'sekizai',
@@ -178,8 +179,15 @@ INSTALLED_APPS = [
     'djangocms_style',
     'djangocms_googlemap',
     'djangocms_video',
+
+    'haystack',
+    'aldryn_common',
+    'aldryn_search',
+    'standard_form',
+    'spurl',
+
     'oss72',
-    'light_gallery'
+    'light_gallery',
 ]
 
 LANGUAGES = (
@@ -243,3 +251,25 @@ THUMBNAIL_PROCESSORS = (
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters'
 )
+
+# haystack
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.abspath(os.path.dirname(__name__)), 'whoosh_index'),
+    },
+    'en': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.abspath(os.path.dirname(__name__)), 'whoosh_index'),
+    },
+    'ru': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.abspath(os.path.dirname(__name__)), 'whoosh_index'),
+    },
+}
+
+HAYSTACK_ROUTERS = ['aldryn_search.router.LanguageRouter',]
+
+# aldryn_search
+ALDRYN_SEARCH_REGISTER_APPHOOK = True
+#ALDRYN_SEARCH_DEFAULT_LANGUAGE = LANGUAGE_CODE

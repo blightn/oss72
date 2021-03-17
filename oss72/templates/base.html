@@ -66,10 +66,10 @@
                 <div class="collapse navbar-collapse" id="main_nav">
                     <ul class="navbar-nav mr-auto">
                         {% show_menu 0 100 100 100 "menu.html" %}
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Поиск...">
-                        <button class="btn btn-success my-2 my-sm-0" type="button">Поиск</button>
+                    </ul>                   
+                    <form action="{% page_url 'search' %}" method="get" class="form-inline my-2 my-lg-0">
+                        <input type="search" name="q" placeholder="Поиск..." class="form-control mr-sm-2" id="id_q">
+                        <button class="btn btn-success my-2 my-sm-0" type="submit">Поиск</button>
                     </form>
                 </div>
             </nav>

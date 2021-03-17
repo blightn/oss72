@@ -24,3 +24,7 @@ six
 pytz
 
 djangocms-light-gallery
+
+Whoosh
+django-haystack
+aldryn-search
